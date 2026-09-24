@@ -1,6 +1,4 @@
 package br.edu.ifpb.ifgram.service;
 
-public class servive {
-
-
+public class UserService {
 }
