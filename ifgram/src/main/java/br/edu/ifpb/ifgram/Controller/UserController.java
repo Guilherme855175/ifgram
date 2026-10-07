@@ -1,21 +1,25 @@
 package br.edu.ifpb.ifgram.Controller;
 
+import br.edu.ifpb.ifgram.dto.UserRequest;
+import br.edu.ifpb.ifgram.dto.UserResponse;
+import br.edu.ifpb.ifgram.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/api?users")
 public class UserController {
-    @GetMapping
-    public String getUser() {
-        return "get user was called";
-    }
-    @PostMapping
-    public String postUser(){
-       return "chamei o endpoint com um POST" ;
-   }
-  @DeleteMapping
-    public String deleteruser(){
-        return "chamei o endpoint com o DELETE";
-  }
+
+    private final UserService service;
+
+    public UserController(UserService service) {
+        this.service = service;
+}
+     @PostMapping
+    public UserResponse criar(@Valid @RequestBody UserRequest request) {
+        return service.criar(request);
+
+     }
+
 
 }

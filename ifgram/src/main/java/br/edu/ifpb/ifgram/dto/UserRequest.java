@@ -14,7 +14,6 @@ public record UserRequest(
 
      @Size(min=4)
      @NotNull
-
      String senha
 ) {
 
