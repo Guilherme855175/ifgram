@@ -4,6 +4,7 @@ import br.edu.ifpb.ifgram.dto.UserRequest;
 import br.edu.ifpb.ifgram.dto.UserResponse;
 import br.edu.ifpb.ifgram.service.UserService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,7 +17,7 @@ public class UserController {
         this.service = service;
 }
      @PostMapping
-    public UserResponse criar(@Valid @RequestBody UserRequest request) {
+    public UserResponse criar(@Valid @RequestBody UserRequest request) throws Exception {
         return service.criar(request);
 
      }
