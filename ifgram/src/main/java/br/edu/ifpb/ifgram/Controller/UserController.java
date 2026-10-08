@@ -7,6 +7,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api?users")
 public class UserController {
@@ -16,11 +18,31 @@ public class UserController {
     public UserController(UserService service) {
         this.service = service;
 }
-     @PostMapping
-    public UserResponse criar(@Valid @RequestBody UserRequest request) throws Exception {
-        return service.criar(request);
+
+
+    @GetMapping
+    public List<UserResponse> getUsers(){
+        List<UserResponse> listaUsuarios = service.buscarTodosUsuarios();
+        return listaUsuarios;
+    }
+
+    @PostMapping
+    public UserResponse postUser(UserRequest request) throws Exception {
+        UserResponse userResponse = service.criar(request);
+        return userResponse;
+    }
+
+    @DeleteMapping
+    public String deleteUser(){
+        return "chamei o endpoint como um DELETE!";
+    }
+
+
+
+
+
 
      }
 
 
-}
+
