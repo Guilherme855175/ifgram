@@ -3,12 +3,18 @@ package br.edu.ifpb.ifgram.service;
 import br.edu.ifpb.ifgram.dto.UserRequest;
 import br.edu.ifpb.ifgram.dto.UserResponse;
 import br.edu.ifpb.ifgram.repository.UserRepository;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.transaction.Transactional;
 import br.edu.ifpb.ifgram.model.User;
+import jakarta.validation.constraints.Email;
+import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 
 @Service
 public class UserService {
@@ -48,4 +54,25 @@ public class UserService {
         return listaUsuariosResponse;
 
     }
+
+    public UserResponse atualizaUsuarios(UserRequest request) throws Exception {
+        Optional<User> usuario = repository.findByEmail(request.email());
+        if (usuario.isEmpty()){
+            throw new Exception("usuario nao existe no banco de dados");
+        }
+        User usuarioSalvo = usuario.get();
+        usuarioSalvo.setNome(request.nome());
+        repository.save(usuarioSalvo);
+
+        return UserResponse.from(usuarioSalvo);
+
+
+
+    }
+
+
+
+
+
+
 }

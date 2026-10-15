@@ -1,10 +1,13 @@
 package br.edu.ifpb.ifgram.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "usuario")
 public class User {
+
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id ;
 
@@ -30,5 +33,13 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
