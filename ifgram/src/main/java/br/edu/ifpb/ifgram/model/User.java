@@ -1,8 +1,10 @@
 package br.edu.ifpb.ifgram.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
+
+import java.util.Optional;
+
 
 @Entity
 @Table(name = "usuario")
@@ -42,4 +44,58 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-}
+
+    public int length() {
+        return nome.length();
+    }
+
+    public String toLowerCase() {
+        return nome.toLowerCase();
+    }
+
+    public String formatted(Object... args) {
+        return nome.formatted(args);
+    }
+
+    public boolean contentEquals(StringBuffer sb) {
+        return nome.contentEquals(sb);
+    }
+
+    public int lastIndexOf(int ch, int fromIndex) {
+        return nome.lastIndexOf(ch, fromIndex);
+    }
+
+    public boolean contains(CharSequence s) {
+        return nome.contains(s);
+    }
+
+
+
+    public String indent(int n) {
+        return nome.indent(n);
+    }
+
+    public String replace(char oldChar, char newChar) {
+        return nome.replace(oldChar, newChar);
+    }
+
+
+
+    public boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len) {
+        return nome.regionMatches(ignoreCase, toffset, other, ooffset, len);
+    }
+
+    public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
+        nome.getChars(srcBegin, srcEnd, dst, dstBegin);
+    }
+
+    public int lastIndexOf(String str) {
+        return nome.lastIndexOf(str);
+    }
+
+    public Optional<String> describeConstable() {
+        return nome.describeConstable();
+    }
+
+
+    }

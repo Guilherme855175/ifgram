@@ -19,9 +19,20 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+    public void deletarUsuario(UserRequest request) throws Exception{
+        Optional<User> usuario = repository.findByEmail(request.email());
+
+    if (usuario.isEmpty()) {
+        throw new Exception("Usuário não encontrado");
+    }
+
+    User usuarioDeletar = usuario.get();
+    repository.delete(usuarioDeletar);
+}
+
     private final UserRepository repository;
 
-    public UserService(UserRepository repository) {
+    public UserService(UserRepository repository) throws Exception {
         this.repository = repository;
     }
 
