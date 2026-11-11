@@ -27,11 +27,11 @@ public class Post {
 
    @ManyToOne(optional = false)
    @JoinColumn(name = "user_id")
-   private String autor;
+   private User autor;
 
    public Post() {
    }
-   public Post(String imagemUrl,String legenda , String autor ) {
+   public Post(String imagemUrl,String legenda , User autor ) {
    this.imagemUrl = imagemUrl;
    this.legenda = legenda;
    this.autor = autor;
@@ -39,11 +39,38 @@ public class Post {
    public String getImagemUrl() {
       return imagemUrl;
    }
-   public String getlegenda() {
+   public String getLegenda() {
       return legenda;
    }
-   public String getautor() {
+   public User getAutor() {
       return autor;
    }
 
+   public long getId() {
+      return id;
+   }
+
+   public LocalDateTime getCriadoEm() {
+      return criadoEm;
+   }
+
+   public void setId(long id) {
+      this.id = id;
+   }
+
+   public void setImagemUrl(String imagemUrl) {
+      this.imagemUrl = imagemUrl;
+   }
+
+   public void setLegenda(String legenda) {
+      this.legenda = legenda;
+   }
+
+   public void setCriadoEm(LocalDateTime criadoEm) {
+      this.criadoEm = criadoEm;
+   }
+
+   public void setAutor(User autor) {
+      this.autor = autor;
+   }
 }

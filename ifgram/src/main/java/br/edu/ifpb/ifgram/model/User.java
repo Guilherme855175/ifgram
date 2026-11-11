@@ -98,4 +98,6 @@ public class User {
     }
 
 
+    public Object getImagemUrl() {
     }
+}

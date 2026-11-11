@@ -1,15 +1,17 @@
 package br.edu.ifpb.ifgram.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public record PostRequest(
         @NotBlank
         String imagemUrl,
 
-        @NotBlank
+        @Size(max = 300)
         String legenda,
 
-        @NotBlank
+        @NotNull
         String autor
 
         ) {
