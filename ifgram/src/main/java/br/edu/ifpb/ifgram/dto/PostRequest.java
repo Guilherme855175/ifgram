@@ -6,6 +6,12 @@ public record PostRequest(
         @NotBlank
         String imagemUrl,
 
+        @NotBlank
+        String legenda,
+
+        @NotBlank
+        String autor
+
         ) {
 
 
