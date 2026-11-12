@@ -99,5 +99,6 @@ public class User {
 
 
     public Object getImagemUrl() {
+        return null;
     }
 }

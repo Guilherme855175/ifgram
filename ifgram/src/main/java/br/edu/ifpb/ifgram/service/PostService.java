@@ -1,42 +1,56 @@
 package br.edu.ifpb.ifgram.service;
 
-import br.edu.ifpb.ifgram.dto.PostRequest;
-import br.edu.ifpb.ifgram.dto.PostResponse;
-import br.edu.ifpb.ifgram.dto.UserRequest;
-import br.edu.ifpb.ifgram.dto.UserResponse;
-import br.edu.ifpb.ifgram.model.User;
-import br.edu.ifpb.ifgram.repository.Postrepository;
-
-import br.edu.ifpb.ifgram.repository.UserRepository;
-import jakarta.transaction.Transactional;
-import org.jspecify.annotations.Nullable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-public class PostService{
+import br.edu.ifpb.ifgram.model.Post;
+import br.edu.ifpb.ifgram.model.User;
+import br.edu.ifpb.ifgram.repository.UserRepository;
+import br.edu.ifpb.ifgram.repository.Postrepository;
+import br.edu.ifpb.ifgram.dto.PostRequest;
+import br.edu.ifpb.ifgram.dto.PostResponse;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class PostService {
 
     private final UserRepository userRepository;
-    private final  Postrepository postrepository;
+    private final Postrepository postrepository;
 
 
-    public PostService(UserRepository userRepository, Postrepository postrepository) {
-        this.userRepository = userRepository;
+    public PostService(
+            Postrepository postrepository,
+            UserRepository userRepository
+    ) {
         this.postrepository = postrepository;
+        this.userRepository = userRepository;
+
     }
 
     @Transactional
-    public PostResponse criar(PostRequest request){
-        User autor = userRepository.findById(request,autorId())
-                .orElseThrow() ->
-        new ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                reason: "Nao foi possivel criar a publicacao: usuario nao encontrado"
-        )
-
+    public PostResponse criar(PostRequest request) {
+        Optional<User> autor = userRepository.findById(request.autorId());
+        Post post = new Post(request.imagemUrl(), request.legenda(), autor.get());
+         Post postsave = postrepository.save(post);
+         PostResponse response = new PostResponse(
+                 postsave.getId(),
+                 postsave.getImagemUrl(),
+                 postsave.getLegenda(),
+                 postsave.getCriadoEm(),
+                 postsave.getAutor().getId(),
+                 postsave.getAutor().getNome()
+                 );
+         return response;
     }
+public List<PostResponse> listarFeed() {
 
+List<Post> listarPorAutor = userRepository.findBy(long autorld);
+
+}
 
 }
 
