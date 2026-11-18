@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface Postrepository extends JpaRepository<Post, Long> {
 
+
+
+
     List<Postrepository> findByAutorId(Long autorId);
 
     List<Postrepository> findByLegendaContainingIgnoreCase(String trecho);

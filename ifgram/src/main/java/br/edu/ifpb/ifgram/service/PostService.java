@@ -1,9 +1,7 @@
 package br.edu.ifpb.ifgram.service;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ifpb.ifgram.model.Post;
 import br.edu.ifpb.ifgram.model.User;
@@ -46,11 +44,23 @@ public class PostService {
                  );
          return response;
     }
-public List<PostResponse> listarFeed() {
 
-List<Post> listarPorAutor = userRepository.findBy(long autorld);
+
+public PostResponse listarFeed() {
+
+
+
 
 }
 
-}
+
+    List<Post> listarPorAutor = UserRepository.findBy( long autoçord);
+
+
+    public PostResponse buscarPorId(Long id) {
+        Post post = Postrepository.findBy(id)
+                .orElseThrow(() -> new RuntimeException("Post não encontrado com ID: " + id));
+
+        return PostResponse.from(post);
+    }
 
