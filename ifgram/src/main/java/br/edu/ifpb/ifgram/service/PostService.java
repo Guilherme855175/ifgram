@@ -33,34 +33,32 @@ public class PostService {
     public PostResponse criar(PostRequest request) {
         Optional<User> autor = userRepository.findById(request.autorId());
         Post post = new Post(request.imagemUrl(), request.legenda(), autor.get());
-         Post postsave = postrepository.save(post);
-         PostResponse response = new PostResponse(
-                 postsave.getId(),
-                 postsave.getImagemUrl(),
-                 postsave.getLegenda(),
-                 postsave.getCriadoEm(),
-                 postsave.getAutor().getId(),
-                 postsave.getAutor().getNome()
-                 );
-         return response;
+        Post postsave = postrepository.save(post);
+        PostResponse response = new PostResponse(
+                postsave.getId(),
+                postsave.getImagemUrl(),
+                postsave.getLegenda(),
+                postsave.getCriadoEm(),
+                postsave.getAutor().getId(),
+                postsave.getAutor().getNome()
+        );
+        return response;
     }
 
 
-public PostResponse listarFeed() {
-
-
-
-
-}
-
-
-    List<Post> listarPorAutor = UserRepository.findBy( long autoçord);
+    public List<PostResponse> listarFeed() {
+        return postrepository.findAll()
+                .stream()
+                .map(PostResponse::from)
+                .toList();
+    }
 
 
     public PostResponse buscarPorId(Long id) {
-        Post post = Postrepository.findBy(id)
+        Post post = postrepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Post não encontrado com ID: " + id));
 
         return PostResponse.from(post);
     }
 
+}
