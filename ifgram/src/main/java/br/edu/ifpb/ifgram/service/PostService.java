@@ -60,5 +60,10 @@ public class PostService {
 
         return PostResponse.from(post);
     }
+    @Transactional
+    public  void deletar(Long id) {
+        Optional<Post> post = postrepository.findById(id);
+        postrepository.delete(post);
+    }
 
 }

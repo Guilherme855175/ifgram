@@ -10,10 +10,14 @@ public record PostResponse(long id, String imagemUrl, String legenda, LocalDateT
 
     public static PostResponse from(Post post) {
 
-        return new PostResponse(post.getId(),post.getImagemUrl(),post.getLegenda(),post.getCriadoEm(),post.getAutor().getId(), post.getAutor().getNome() );
+        return new PostResponse(post.getId(), post.getImagemUrl(), post.getLegenda(), post.getCriadoEm(), post.getAutor().getId(), post.getAutor().getNome());
 
 
     }
 
+    public static PostResponse from(PostResponse post) {
+        return post;
+    }
 }
+
 
